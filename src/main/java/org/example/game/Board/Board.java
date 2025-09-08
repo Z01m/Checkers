@@ -17,14 +17,14 @@ public class Board {
                 if((x + dx) % 2 == 0) 
                 {
                     if(y<3)
-                        board.pieces[x][y]=new Pawn(Pawn.Color.BLACK);
+                        board.pieces[x][y]=new Pawn(Piece.Color.BLACK);
                     else if(y>4)
-                        board.pieces[x][y]=new Pawn(Pawn.Color.WHITE);
+                        board.pieces[x][y]=new Pawn(Piece.Color.WHITE);
                     else
-                        board.pieces[x][y]=new Piece(Piece.PieceType.None);
+                        board.pieces[x][y]=new Piece(Piece.PieceType.NONE);
                 } 
                 else
-                    board.pieces[x][y]=new Piece(Piece.PieceType.None);
+                    board.pieces[x][y]=new Piece(Piece.PieceType.NONE);
             }
         return board;
     }
@@ -36,7 +36,7 @@ public class Board {
         pieces[x][y]=piece;
     }
     public boolean isEmpty(int x, int y) {
-        return pieces[x][y].getType() == Piece.PieceType.None;
+        return pieces[x][y].getType() == Piece.PieceType.NONE;
     }
     public Object Clone(){
         Board ret = new Board();

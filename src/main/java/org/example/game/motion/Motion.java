@@ -16,4 +16,14 @@ public class Motion {
     public boolean isEmpty(){
         return Moves.isEmpty();
     }
+    
+    public int size(){
+        return Moves.size();
+    }
+    public List<Point> getMoves(){
+        return Moves;
+    }
+    public void setMoves(List<Point> moves){
+        Moves = moves;
+    }
 }

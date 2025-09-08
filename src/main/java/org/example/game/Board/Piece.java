@@ -1,21 +1,20 @@
 ﻿package org.example.game.Board;
 
 public class Piece {
-    
+    public enum Color {WHITE, BLACK}
     public enum PieceType {
-        None,
-        White_pawn,
-        Black_pawn,
-        White_king,
-        Black_king,
-        white,
-        black
+        NONE,
+        PIECE,
+        PAWN,
+        KING
     }
     public Piece() {}
     public Piece(PieceType type) {this.setType(type);}
+    protected Color color;
     
-    private PieceType type = PieceType.None;
+    protected PieceType type = PieceType.NONE;
 
     public PieceType getType() {return type;}
     public void setType(PieceType type) {this.type = type;}
+    public Color getColor() {return this.color;}
 }
