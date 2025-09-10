@@ -1,5 +1,7 @@
 ﻿package org.example.game.Board;
 
+import java.security.PrivateKey;
+
 public class Piece {
     public enum Color {WHITE, BLACK}
     public enum PieceType {

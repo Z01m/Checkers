@@ -20,6 +20,7 @@ public class BeatNode {
     }
     
     public BeatNode Parent;
+    
     public void setParent(BeatNode Parent){
         this.Parent = Parent;
     }
