@@ -8,6 +8,8 @@ import org.example.game.motion.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.logging.XMLFormatter;
 
 public final class Rules {
@@ -145,6 +147,43 @@ public final class Rules {
         }
         
     }
+    
+    public static motionValidator FindValidMotions(Board board, boolean isWhite){
+        List<List<Point>> moves = new ArrayList<List<Point>>();
+        List<BeatNode> kills = new ArrayList<BeatNode>();
+
+        BiFunction<Integer, Integer, Boolean> colorValidator;
+        
+        if (isWhite) {
+            colorValidator = (x, y) -> board.getPiece(x, y).getColor() == Piece.Color.WHITE;
+        } else {
+            colorValidator = (x, y) -> board.getPiece(x, y).getColor() == Piece.Color.BLACK;
+        }
+        
+        for(int i=0;i<Board.BOARD_SIZE;i++)
+            for(int j=0;j<Board.BOARD_SIZE;j++){
+                if(colorValidator.apply(i, j)) {
+                    BeatNode kill = new BeatNode();
+                    
+                    if(board.getPiece(i,j).getType() == Piece.PieceType.KING) {
+                        King.FindMotion(board,isWhite,i,j,moves,kill);
+                    }
+                    else {
+                        Pawn.FindKills(board,isWhite,i,j,kill);
+                    }
+                    if(kill.Move == null) kills.add(kill);
+                }
+            }
+        var resultKills = new ArrayList<List<Point>>();
+        kills.forEach(pk -> {
+            resultKills.addAll(pk.SplitToBranches());
+            pk.Dispose();
+        });
+
+        return new motionValidator(resultKills, moves);
+    }
+    
+    public static 
     
     private static boolean InBounds(int val)
     {
