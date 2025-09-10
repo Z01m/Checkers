@@ -5,6 +5,7 @@ import org.example.game.Board.Piece;
 import org.example.game.motion.Motion;
 import org.example.game.motion.Point;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -182,8 +183,13 @@ public final class Rules {
 
         return new motionValidator(resultKills, moves);
     }
-    
-    public static 
+
+    public static AbstractMap.SimpleEntry<Integer, Integer> getMotionsCount(Board board) {
+        int whiteMotions = FindValidMotions(board, true).GetOnlyMotionCount();
+        int blackMotions = FindValidMotions(board, false).GetOnlyMotionCount();
+
+        return new AbstractMap.SimpleEntry<>(whiteMotions, blackMotions);
+    } 
     
     private static boolean InBounds(int val)
     {
