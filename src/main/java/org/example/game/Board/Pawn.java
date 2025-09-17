@@ -9,6 +9,11 @@ public class Pawn extends Piece {
         }
     public Object Clone(){
         return new Pawn(this.getColor());
-    }    
+    }
+    
+    public boolean isWhite(){
+        return this.color == Color.WHITE;
+    }
+    
         
 }
