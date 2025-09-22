@@ -1,4 +1,4 @@
-﻿package org.example.game.Board;
+package org.example.game.Board;
 
 import java.security.PrivateKey;
 

@@ -1,4 +1,4 @@
-﻿package org.example.game.Board;
+package org.example.game.Board;
 
 public class Pawn extends Piece {
     public Pawn(){}

@@ -1,4 +1,4 @@
-﻿package org.example.game.rules;
+package org.example.game.rules;
 
 import org.example.game.motion.Motion;
 import org.example.game.motion.Point;

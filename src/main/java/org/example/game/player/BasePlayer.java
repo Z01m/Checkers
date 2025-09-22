@@ -1,4 +1,4 @@
-﻿package org.example.game.player;
+package org.example.game.player;
 
 import org.example.game.Board.Board;
 import org.example.game.motion.Motion;

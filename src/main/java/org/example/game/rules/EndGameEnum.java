@@ -1,4 +1,4 @@
-﻿package org.example.game.rules;
+package org.example.game.rules;
 
 public enum EndGameEnum {
     EG_NONE(""),

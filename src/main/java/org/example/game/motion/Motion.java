@@ -1,4 +1,4 @@
-﻿package org.example.game.motion;
+package org.example.game.motion;
 
 import java.util.ArrayList;
 import java.util.List;

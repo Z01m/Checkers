@@ -1,4 +1,4 @@
-﻿package org.example.game.rules;
+package org.example.game.rules;
 
 import java.util.List;
 import java.util.Objects;
