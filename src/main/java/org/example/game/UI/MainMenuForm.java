@@ -12,6 +12,7 @@ public class MainMenuForm {
     private JPanel mainPanel;
 
     public MainMenuForm(){
+        setupButtonActions();
     }
     
     private void setupButtonActions(){
