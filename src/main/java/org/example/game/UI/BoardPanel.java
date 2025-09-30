@@ -5,16 +5,18 @@ import java.awt.*;
 
 public class BoardPanel {
     private JPanel boardPanel;
-    private JPanel boardPane;
 
     public BoardPanel() {
+        // Инициализируем boardPanel перед использованием
+        boardPanel = new JPanel();
         setupBoardAppearance();
     }
 
     private void setupBoardAppearance() {
         // Устанавливаем layout для сетки 8x8
         boardPanel.setLayout(new GridLayout(8, 8));
-        boardPanel.setPreferredSize(new Dimension(400, 400));
+        boardPanel.setPreferredSize(new Dimension(480, 480));
+        boardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         // Создаем шахматную доску
         createChessboard();
@@ -30,7 +32,7 @@ public class BoardPanel {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 JPanel cell = new JPanel();
-                cell.setPreferredSize(new Dimension(50, 50));
+                cell.setPreferredSize(new Dimension(60, 60));
 
                 if ((row + col) % 2 == 0) {
                     cell.setBackground(lightColor);
@@ -42,6 +44,10 @@ public class BoardPanel {
                 boardPanel.add(cell);
             }
         }
+
+        // Обновляем панель
+        boardPanel.revalidate();
+        boardPanel.repaint();
     }
 
     public JPanel getBoardPanel() {
