@@ -74,10 +74,8 @@ public class GameModeDialog extends JDialog {
     }
 
     private void openBoardWindow(String gameMode) {
-        // Закрываем диалог выбора режима
         dispose();
-
-        // Создаем и показываем окно с доской
+        
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -88,21 +86,17 @@ public class GameModeDialog extends JDialog {
 
     private void createAndShowBoardWindow(String gameMode) {
         JFrame boardFrame = new JFrame("Шашки - " + gameMode);
-
-        // Создаем основную панель
+        
         JPanel mainPanel = new JPanel(new BorderLayout());
-
-        // Добавляем панель с доской
+        
         BoardPanel boardPanel = new BoardPanel();
         mainPanel.add(boardPanel.getBoardPanel(), BorderLayout.CENTER);
-
-        // Добавляем информацию о режиме сверху
+        
         JLabel modeLabel = new JLabel("Режим: " + gameMode, SwingConstants.CENTER);
         modeLabel.setFont(new Font("Arial", Font.BOLD, 16));
         modeLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         mainPanel.add(modeLabel, BorderLayout.NORTH);
-
-        // Добавляем кнопку "Назад" снизу
+        
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton backButton = new JButton("Назад в меню");
         backButton.addActionListener(new ActionListener() {
@@ -124,10 +118,7 @@ public class GameModeDialog extends JDialog {
     }
 
     private void openMainMenu() {
-        // Здесь нужно создать экземпляр вашего главного меню
-        // Например: new MainMenuForm().setVisible(true);
         System.out.println("Возврат в главное меню");
-        // Пока просто закрываем приложение или оставляем как есть
     }
 
     private void onBack() {

@@ -19,4 +19,7 @@ public class Piece {
     public PieceType getType() {return type;}
     public void setType(PieceType type) {this.type = type;}
     public Color getColor() {return this.color;}
+    public boolean isWhite(){
+        return this.color == Color.WHITE;
+    }
 }
