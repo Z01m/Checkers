@@ -1,6 +1,7 @@
 package org.example.game.player;
 
 import org.example.game.Board.Board;
+import org.example.game.UI.BoardPanel;
 import org.example.game.motion.Motion;
 import org.example.game.rules.EndGameEnum;
 
@@ -17,7 +18,7 @@ public abstract class BasePlayer {
     protected MotionHandler broadcastMotion;
     protected GameOverILooseHandler broadcastGameOverILoose;
 
-    public abstract void requestMotion(Board board,boolean isWhite);
+    public abstract void requestMotion(BoardPanel BoardPanel, boolean isWhite);
     public abstract String getName();
     
     public void setBroadcastMotion(MotionHandler motionHandler) {

@@ -4,16 +4,24 @@ import org.example.game.Board.Board;
 import org.example.game.Board.King;
 import org.example.game.Board.Pawn;
 import org.example.game.Board.Piece;
-
+import org.example.game.motion.Point;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class BoardPanel {
+public class BoardPanel
+{
     private JPanel boardPanel;
+    public Board board;
+
+    @FunctionalInterface
+    public interface SelectCellHandler {
+        void selectCell(Point point);
+    }
 
     public BoardPanel() {
+        board = Board.CreateBoard();
         // Инициализируем boardPanel перед использованием
         boardPanel = new JPanel();
         
@@ -47,8 +55,7 @@ public class BoardPanel {
 
     private void updateChessboard() {
         // Очищаем панель перед обновлением
-        boardPanel.removeAll();
-        Board board = Board.CreateBoard(); // Или используйте существующий экземпляр доски
+        boardPanel.removeAll();// Или используйте существующий экземпляр доски
         Color lightColor = new Color(240, 217, 181); // Светлый
         Color darkColor = new Color(181, 136, 99);   // Темный
 
@@ -154,7 +161,7 @@ public class BoardPanel {
         // Логика для выбора шашки, показа возможных ходов и т.д.
     }
 
-    // Дополнительный метод для подсветки возможных ходов
+    public Board getBoard() {return this.board;}
    
     
 }
