@@ -1,4 +1,4 @@
-package org.example.game.player;
+package org.example.game.models.player;
 
 import org.example.game.Board.Board;
 import org.example.game.UI.BoardPanel;
@@ -9,8 +9,6 @@ import java.util.List;
 
 import org.example.game.rules.Rules;
 import org.example.game.rules.motionValidator;
-
-import javax.swing.*;
 
 public class HumanPlayer extends BasePlayer{
     motionValidator validator;

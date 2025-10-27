@@ -1,6 +1,5 @@
-package org.example.game.player;
+package org.example.game.models.player;
 
-import org.example.game.Board.Board;
 import org.example.game.UI.BoardPanel;
 import org.example.game.motion.Motion;
 import org.example.game.rules.EndGameEnum;
