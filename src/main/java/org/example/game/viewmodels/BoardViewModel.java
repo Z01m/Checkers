@@ -18,6 +18,16 @@ public class BoardViewModel extends ViewModelBase{
     private SelectCellHandler onSelectCell;
     private BoardChangeCancelHandler boardChangeCancel;
 
+    private Point _selectedPiece = null;
+
+    public Point get_selectedPiece() {
+        return _selectedPiece;
+    }
+
+    public void set_selectedPiece(Point _selectedPiece) {
+        this._selectedPiece = _selectedPiece;
+    }
+
     private Timer uiTimer;
 
     @FunctionalInterface

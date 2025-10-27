@@ -1,5 +1,7 @@
 package org.example.game.Board;
 
+import org.example.game.motion.Point;
+
 import java.lang.constant.Constable;
 
 public class Board {
@@ -32,9 +34,19 @@ public class Board {
     public Piece getPiece(int x, int y) {
         return pieces[x][y];
     }
+
+    public Piece getPiece(Point p){
+        return pieces[p.X][p.Y];
+    }
+
+
     public void setPiece(int x, int y, Piece piece) {
         pieces[x][y]=piece;
     }
+    public void setPiece(Point p, Piece piece) {
+        pieces[p.X][p.Y]=piece;
+    }
+
     public boolean isEmpty(int x, int y) {
         return pieces[x][y].getType() == Piece.PieceType.NONE;
     }

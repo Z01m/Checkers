@@ -23,7 +23,8 @@ public class Motion {
     public List<Point> getMoves(){
         return Moves;
     }
-    public void setMoves(List<Point> moves){
-        Moves = moves;
+
+    public void setMoves(boolean add) {
+
     }
 }

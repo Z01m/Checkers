@@ -2,7 +2,9 @@ package org.example.game.models.player;
 
 import org.example.game.UI.BoardPanel;
 import org.example.game.motion.Motion;
+import org.example.game.motion.Point;
 import org.example.game.rules.EndGameEnum;
+import org.example.game.viewmodels.BoardViewModel;
 
 public abstract class BasePlayer {
     
@@ -17,7 +19,7 @@ public abstract class BasePlayer {
     protected MotionHandler broadcastMotion;
     protected GameOverILooseHandler broadcastGameOverILoose;
 
-    public abstract void requestMotion(BoardPanel BoardPanel, boolean isWhite);
+    public abstract void requestMotion(BoardViewModel BoardPanel, boolean isWhite);
     public abstract String getName();
     
     public void setBroadcastMotion(MotionHandler motionHandler) {
@@ -42,7 +44,7 @@ public abstract class BasePlayer {
     
     public BasePlayer() { }
     
-    public void onSelectCell(int x, int y) {}
+    public void onSelectCell(Point selection) {}
     public void onBoardChangeCancel(){}
     
 }
