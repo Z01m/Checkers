@@ -6,7 +6,8 @@ public enum EndGameEnum {
     EG_INVALID_MOTION("Ход не соответствует правилам"),
     EG_DRAW("Ничья"),
     EG_WIN_BLACK("Черные победили"),
-    EG_WIN_WHITE("Белые победили");
+    EG_WIN_WHITE("Белые победили"),
+    EG_ERROR("ошибка");
 
     private final String description;
 

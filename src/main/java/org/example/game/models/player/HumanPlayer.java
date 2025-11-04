@@ -77,5 +77,4 @@ public class HumanPlayer extends BasePlayer{
             boardcastMotion(motion);
         }
     }
-
 }

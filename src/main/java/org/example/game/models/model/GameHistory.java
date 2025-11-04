@@ -19,7 +19,7 @@ public class GameHistory {
     }
 
     public List<MotionInfo> getMotion() {
-        return new ArrayList<>(motion);
+        return motion;
     }
 
     public void setMotion(List<MotionInfo> motion) {
