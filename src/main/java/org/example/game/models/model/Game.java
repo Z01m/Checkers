@@ -5,6 +5,8 @@ import org.example.game.models.player.AIPlayer;
 import org.example.game.models.player.BasePlayer;
 import org.example.game.motion.Motion;
 import org.example.game.rules.EndGameEnum;
+import org.example.game.rules.Rules;
+import org.example.game.rules.motionValidator;
 import org.example.game.viewmodels.BoardViewModel;
 
 import javax.swing.*;
@@ -23,7 +25,7 @@ public class Game {
     private int movesWithoutBeats = 0;
     private static final int MOVES_WITHOUT_BEATS_LIMIT = 5;
 
-    private List<BasePlayer.GameOverILooseHandler> onGameOverHandlers = new ArrayList<>();
+    private List<GameOverEventHandler> onGameOverHandlers = new ArrayList<>();
 
     public BoardViewModel getBoardViewModel() {
         return boardViewModel;
@@ -34,13 +36,29 @@ public class Game {
     public BasePlayer getWhitePlayer() { return whitePlayer; }
     public BasePlayer getBlackPlayer() { return blackPlayer; }
 
-    public Game(BasePlayer whitePlayer, BasePlayer black){
-        this.whitePlayer = whitePlayer;
+    public Game(BasePlayer white, BasePlayer black){
+        this.whitePlayer = white;
         this.whitePlayer.setBroadcastMotion(this::playerPrepareMotion);
+        this.whitePlayer.setBroadcastGameOverILoose(this::gameOverPlayerLoose);
 
+        this.blackPlayer = black;
+        this.blackPlayer.setBroadcastMotion(this::playerPrepareMotion);
+        this.blackPlayer.setBroadcastGameOverILoose(this::gameOverPlayerLoose);
+
+        this.boardViewModel = new BoardViewModel(Board.CreateBoard());
+        this.currentPlayer = whitePlayer;
+        boardViewModel.setCurrentPlayerWhite(true);
     }
 
-    private void playerPrepareMotion(Motion mtn){
+    public void addGameOverHandler(GameOverEventHandler handler) {
+        onGameOverHandlers.add(handler);
+    }
+
+    public void removeGameOverHandler(GameOverEventHandler handler) {
+        onGameOverHandlers.remove(handler);
+    }
+
+    private void playerPrepareMotion(Motion mtn){ //!!!!!!!!!!!!!!!TODO!!!!!!!!!!!!!!!!!
         boolean currentWhite = currentPlayer == whitePlayer;
         Board board = (Board) boardViewModel.getBoard().Clone();
     }
@@ -54,11 +72,22 @@ public class Game {
         return whitePlayer == player;
     }
 
-    private void gameOver(EndGameEnum type, BasePlayer winner){
-        for(BasePlayer.GameOverILooseHandler handler : onGameOverHandlers){
-            handler.onGameOver(this, new GameOverEventArgs(type,winner,whitePlayer,blackPlayer));
+    private static motionValidator.MotionValidEnum validateMotion(Board board, Motion mtn, boolean isWhite) {
+        motionValidator validator = Rules.FindValidMotions(board, isWhite);
+        return validator.validate(mtn);
+    }
+
+    private static boolean noValidMotions(Board board, boolean isWhite) {
+        motionValidator validator = Rules.FindValidMotions(board, isWhite);
+        return validator.noValidMoves();
+    }
+
+    private void gameOver(EndGameEnum type, BasePlayer winner) {
+        for (GameOverEventHandler handler : onGameOverHandlers) {
+            handler.onGameOver(this, new GameOverEventArgs(type, winner, whitePlayer, blackPlayer));
         }
-        dispatchResult(whitePlayer,blackPlayer,winner);
+
+        dispatchResult(whitePlayer, blackPlayer, winner);
     }
 
     private static void dispatchResult(BasePlayer white, BasePlayer black, BasePlayer winner){
@@ -95,10 +124,36 @@ public class Game {
         }
     }
 
+    public void start() {
+        requestMotion();
+    }
+
     private void requestMotion(){
         BasePlayer secondPlayer = currentPlayer == blackPlayer ? whitePlayer : blackPlayer;
     }
 
+    public void dispose() {
+        boardViewModel = null;
+        blackPlayer.setBroadcastMotion(null);
+        whitePlayer.setBroadcastMotion(null);
+        blackPlayer.setBroadcastGameOverILoose(null);
+        whitePlayer.setBroadcastGameOverILoose(null);
+        onGameOverHandlers.clear();
+    }
+
+    interface Disposable {
+        void dispose();
+    }
+
+    private void togglePlayer() {
+        currentPlayer = (currentPlayer == whitePlayer ? blackPlayer : whitePlayer);
+        boardViewModel.setCurrentPlayerWhite(!boardViewModel.getCurrentPlayerWhite());
+    }
+
+
+    interface GameOverEventHandler {
+        void onGameOver(Game sender, GameOverEventArgs eventArgs);
+    }
 
     class GameOverEventArgs {
         private EndGameEnum reason;
@@ -138,5 +193,7 @@ public class Game {
     @interface DescriptionAttribute {
         String value();
     }
+
+
 
 }
